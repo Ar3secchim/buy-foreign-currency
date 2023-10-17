@@ -11,6 +11,7 @@ Este projeto Java tem o objetivo de permitir que os usuários realizem ordens de
 Antes de iniciar, certifique-se de ter as seguintes dependências instaladas:
 
 - Java Development Kit (JDK) - Versão 17 ou superior.
+- Maven 
 
 ## Configuração
 Clone o repositório:
