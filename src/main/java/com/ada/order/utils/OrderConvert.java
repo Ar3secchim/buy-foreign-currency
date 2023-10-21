@@ -1,9 +1,11 @@
 package com.ada.order.utils;
 
 import com.ada.order.model.Order;
-import com.ada.order.model.dto.order.OrderRequest;
-import com.ada.order.model.dto.order.OrderResponse;
+import com.ada.order.Controller.dto.order.OrderRequest;
+import com.ada.order.Controller.dto.order.OrderResponse;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 public class OrderConvert {
@@ -20,17 +22,18 @@ public class OrderConvert {
   }
 
   public static OrderResponse toResponse(Order order){
-    //TODO logic UserID
-
+    DecimalFormat df = new DecimalFormat("#,###.00");
     OrderResponse orderResponse = new OrderResponse();
+
     orderResponse.setId(order.getId());
+    //TODO logic UserID
     orderResponse.setIdUser(1);
     orderResponse.setCpfUser(order.getCpfUser());
     orderResponse.setRequestDate(order.getRequestDate());
     orderResponse.setTypeCurrency(order.getTypeCurrency());
-    orderResponse.setValueForeignCurrency(order.getValueForeignCurrency());
-    orderResponse.setQuotationValue(order.getQuotationValue());
-    orderResponse.setValueTotalOperation(order.getValueTotalOperation());
+    orderResponse.setValueForeignCurrency(df.format(order.getValueForeignCurrency()));
+    orderResponse.setQuotationValue(df.format(order.getQuotationValue()));
+    orderResponse.setValueTotalOperation(df.format(order.getValueTotalOperation()));
     orderResponse.setWithdrawalAgencyNumber(order.getWithdrawalAgencyNumber());
 
     return orderResponse;
