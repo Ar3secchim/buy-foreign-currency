@@ -4,6 +4,7 @@ import com.ada.order.model.Exchange;
 import com.ada.order.model.TypeCurrency;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
+
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -14,6 +15,7 @@ public class HttpCustom {
         this.restTemplate = new RestTemplate();
     }
 
+
     public Exchange getExchange(TypeCurrency currency) {
         String baseUrl = "https://economia.awesomeapi.com.br/json/" + currency;
 
@@ -22,13 +24,11 @@ public class HttpCustom {
 
             if (response != null && response.length > 0) {
                 return response[0];
-            }
+            
         } catch (RestClientException error) {
             //TODO lançar erro e tratar erro
             error.getMessage();
             return null;
         }
       return null;
-    }
-
 }

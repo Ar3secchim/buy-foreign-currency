@@ -9,5 +9,4 @@ public class Exchange{
     private String codein;
     private Double bid;
     private String ask;
-
 }
