@@ -1,35 +1,45 @@
 package com.ada.order.service;
 
 import com.ada.order.model.Order;
-import com.ada.order.model.dto.order.OrderRequest;
-import com.ada.order.model.dto.order.OrderResponse;
+import com.ada.order.Controller.dto.order.OrderRequest;
+import com.ada.order.Controller.dto.order.OrderResponse;
+import com.ada.order.model.TypeCurrency;
 import com.ada.order.repository.OrderRepository;
 import com.ada.order.utils.OrderConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Currency;
+
 @Service
 public class OrderService {
   private final OrderRepository orderRepository;
+  private final ExchangeService exchangeService;
+  //private final UserRepository;
 
   @Autowired
   public OrderService(
-    OrderRepository orderRepository
-  ) {
+    OrderRepository orderRepository,
+    ExchangeService exchangeService) {
     this.orderRepository = orderRepository;
+
+    this.exchangeService = exchangeService;
   }
 
-  public OrderResponse createOrder(OrderRequest orderRequest){
-    // Verifica se o cliente com o CPF existe
+  public OrderResponse create(OrderRequest orderRequest){
+    TypeCurrency current = orderRequest.getTypeCurrency();
+    BigDecimal rateExchange = exchangeService.getRateExchange(current);
+    BigDecimal valueForeignCurrency = orderRequest.getValueForeignCurrency();
 
-    // Obtém a taxa de câmbio da moeda
-
-    // Calcula o valor total da operação
-
-    // Crie a ordem de compra
     Order order = OrderConvert.toEntity(orderRequest);
+    order.setQuotationValue(rateExchange);
+    order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
 
-    // Salve a ordem de compra no banco de dados
     return OrderConvert.toResponse(orderRepository.save(order));
+  }
+
+  private static BigDecimal calcValueTotalOperation(BigDecimal rateExchange, BigDecimal value){
+    return rateExchange.multiply(value);
   }
 }
