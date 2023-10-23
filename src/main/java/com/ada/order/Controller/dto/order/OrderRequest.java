@@ -1,4 +1,4 @@
-package com.ada.order.Controller.dto.order;
+package com.ada.order.controller.dto.order;
 
 import com.ada.order.model.TypeCurrency;
 import lombok.Getter;

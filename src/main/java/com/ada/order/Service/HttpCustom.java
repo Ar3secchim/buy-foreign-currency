@@ -15,7 +15,6 @@ public class HttpCustom {
         this.restTemplate = new RestTemplate();
     }
 
-
     public Exchange getExchange(TypeCurrency currency) {
         String baseUrl = "https://economia.awesomeapi.com.br/json/" + currency;
 
@@ -24,11 +23,12 @@ public class HttpCustom {
 
             if (response != null && response.length > 0) {
                 return response[0];
-            
+            }
         } catch (RestClientException error) {
             //TODO lançar erro e tratar erro
             error.getMessage();
             return null;
         }
-      return null;
+        return null;
+    }
 }
