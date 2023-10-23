@@ -1,8 +1,8 @@
 package com.ada.order.service;
 
 import com.ada.order.model.Order;
-import com.ada.order.Controller.dto.order.OrderRequest;
-import com.ada.order.Controller.dto.order.OrderResponse;
+import com.ada.order.controller.dto.order.OrderRequest;
+import com.ada.order.controller.dto.order.OrderResponse;
 import com.ada.order.model.TypeCurrency;
 import com.ada.order.repository.OrderRepository;
 import com.ada.order.utils.OrderConvert;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Currency;
 
 @Service
 public class OrderService {
