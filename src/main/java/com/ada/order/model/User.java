@@ -1,4 +1,4 @@
-package model;
+package com.ada.order.model;
 
 
 import jakarta.persistence.*;

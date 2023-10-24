@@ -1,15 +1,15 @@
-package exception;
+package com.ada.order.Controller.dto;
 
 
-import dto.UserRequest;
-import dto.UserResponse;
+import com.ada.order.Controller.dto.exception.PasswordValidationError;
+import com.ada.order.Controller.dto.user.UserRequest;
+import com.ada.order.Controller.dto.user.UserResponse;
 import jakarta.validation.Valid;
-import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.UserService;
+import com.ada.order.service.UserService;
 
 import java.net.URI;
 

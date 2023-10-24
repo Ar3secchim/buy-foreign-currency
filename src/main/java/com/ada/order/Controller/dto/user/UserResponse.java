@@ -1,4 +1,4 @@
-package dto;
+package com.ada.order.Controller.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

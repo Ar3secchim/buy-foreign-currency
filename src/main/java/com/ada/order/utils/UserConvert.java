@@ -1,9 +1,9 @@
-package utils;
+package com.ada.order.utils;
 
 
-import dto.UserResponse;
-import dto.UserRequest;
-import model.User;
+import com.ada.order.Controller.dto.user.UserResponse;
+import com.ada.order.Controller.dto.user.UserRequest;
+import com.ada.order.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 

@@ -1,6 +1,6 @@
-package repository;
+package com.ada.order.repository;
 
-import model.User;
+import com.ada.order.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

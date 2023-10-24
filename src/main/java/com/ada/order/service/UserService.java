@@ -1,17 +1,19 @@
-package service;
+package com.ada.order.service;
 
-import dto.UserRequest;
-import dto.UserResponse;
-import model.User;
+import com.ada.order.Controller.dto.exception.PasswordValidationError;
+import com.ada.order.Controller.dto.user.UserRequest;
+import com.ada.order.Controller.dto.user.UserResponse;
+import com.ada.order.model.User;
+import com.ada.order.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import repository.IUser;
-import utils.UserConvert;
+import com.ada.order.repository.IUser;
+import com.ada.order.utils.UserConvert;
 
-import javax.xml.validation.Validator;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -30,12 +32,12 @@ public class UserService {
         return UserConvert.toResponsPage(users);
     }
 
-    public UserResponse saveUser(UserRequest userDTO) throws PasswordValidationError{
+    public UserResponse saveUser(UserRequest userDTO) throws PasswordValidationError {
       User user = UserConvert.toEntity(userDTO);
       user.setActive(true);
-      String encodePassword =  passwordEncoder.encode(user.getPassword());
-      user.setPassword(encodePassword);
-      if(!Validator.passwordValidate(user.getPassword())) throw new PasswordValidationError("senha deve seguir padrao");
+      String encodePassword =  passwordEncoder.encode(user.getSenha());
+      user.setSenha(encodePassword);
+      if(!Validator.passwordValidate(user.getSenha())) throw new PasswordValidationError("senha deve seguir padrao");
       User UserEntity = userRepository.save(user);
       return UserConvert.toResponse(UserEntity);
     }
