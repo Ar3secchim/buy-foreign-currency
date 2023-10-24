@@ -25,12 +25,12 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column (name = "nome", nullable = false)
     private String nome;
 
-    @Column (name = "cpf", nullable = false)
+    @Column (name = "cpf", nullable = false, unique = true)
     private String cpf;
 
     @Column (name = "dataDeNascimento", nullable = false)
@@ -41,6 +41,11 @@ public class User implements UserDetails {
 
     @Column (name = "sexo", nullable = false)
     private String sexo;
+
+    @Column (name = "senha", nullable = false)
+    private String senha;
+
+    private Boolean active;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
