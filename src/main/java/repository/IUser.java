@@ -17,7 +17,7 @@ public interface IUser extends JpaRepository<User, Integer>, QuerydslPredicateEx
     Page<User> findAllActiveUsers(Pageable pageable);
 
 
-    List<User> findByName (String nome);
+    List<User> findAllByName (String nome);
 
     UserDetails findByCpf (String cpf);
 
