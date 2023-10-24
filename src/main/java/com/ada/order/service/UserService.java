@@ -12,19 +12,21 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import com.ada.order.repository.IUser;
 import com.ada.order.utils.UserConvert;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Service
 public class UserService {
 
     @Autowired
     IUser userRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+   PasswordEncoder passwordEncoder;
 
     public Page<UserResponse> getUser(int page, int size, String direction){
         PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
@@ -35,7 +37,7 @@ public class UserService {
     public UserResponse saveUser(UserRequest userDTO) throws PasswordValidationError {
       User user = UserConvert.toEntity(userDTO);
       user.setActive(true);
-      String encodePassword =  passwordEncoder.encode(user.getSenha());
+      String encodePassword = passwordEncoder.encode(user.getSenha());
       user.setSenha(encodePassword);
       if(!Validator.passwordValidate(user.getSenha())) throw new PasswordValidationError("senha deve seguir padrao");
       User UserEntity = userRepository.save(user);
@@ -63,7 +65,7 @@ public class UserService {
 
     public void deleteUserById(Integer id){
         User user = userRepository.findById(id)
-                .orElseThrow() -> new NoSuchElementException("Cliente nao encontrado");
+                .orElseThrow(() -> new NoSuchElementException("Cliente nao encontrado"));
         user.setActive(false);
         userRepository.save(user);
     }
