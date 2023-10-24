@@ -1,10 +1,9 @@
-package com.ada.order.Controller.dto.order;
+package com.ada.order.controller.dto.order;
 
 import com.ada.order.model.TypeCurrency;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Setter

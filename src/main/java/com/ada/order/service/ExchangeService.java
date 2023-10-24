@@ -17,7 +17,7 @@ public class ExchangeService {
 
     public BigDecimal getRateExchange(TypeCurrency currency) {
         Double rateExchange = httpCustom.getExchange(currency).getBid();
-      return conversionRateExchangeForBigDecimal(rateExchange);
+        return conversionRateExchangeForBigDecimal(rateExchange);
     }
 
     private static BigDecimal conversionRateExchangeForBigDecimal(Double rateExchange){
