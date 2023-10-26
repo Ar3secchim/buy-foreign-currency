@@ -18,11 +18,8 @@ public class OrderService {
   //private final UserRepository;
 
   @Autowired
-  public OrderService(
-    OrderRepository orderRepository,
-    ExchangeService exchangeService) {
+  public OrderService (OrderRepository orderRepository,ExchangeService exchangeService) {
     this.orderRepository = orderRepository;
-
     this.exchangeService = exchangeService;
   }
 
@@ -40,5 +37,11 @@ public class OrderService {
 
   private static BigDecimal calcValueTotalOperation(BigDecimal rateExchange, BigDecimal value){
     return rateExchange.multiply(value);
+  }
+
+
+  public BigDecimal getRateExchange(TypeCurrency currency) {
+    BigDecimal exchangeRate  = ExchangeService.fetchExchangeRateAPI(currency);
+    return exchangeRate;
   }
 }

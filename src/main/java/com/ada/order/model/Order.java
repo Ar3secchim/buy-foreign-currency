@@ -26,12 +26,12 @@ public class Order {
   private LocalDateTime requestDate;
 
   @Column(nullable = false)
-  private TypeCurrency typeCurrency;
+  private TypeCurrency typeCurrency; //tipo de moeda "currencyPair"
 
   @Column(nullable = false)
-  private BigDecimal valueForeignCurrency;
+  private BigDecimal valueForeignCurrency; //valor total da operaçao "amount"
 
-  private BigDecimal quotationValue;
+  private BigDecimal quotationValue; // taxa de cambio ExchangeRate
 
   private BigDecimal valueTotalOperation;
 
