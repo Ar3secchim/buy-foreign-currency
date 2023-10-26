@@ -1,5 +1,6 @@
 package com.ada.order.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,5 +9,5 @@ import lombok.Setter;
 public class Exchange{
     private String codein;
     private Double bid;
-    private String ask;
+    private Double ask;
 }
