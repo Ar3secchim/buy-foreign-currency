@@ -4,7 +4,6 @@ package exception;
 import dto.UserRequest;
 import dto.UserResponse;
 import jakarta.validation.Valid;
-import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
