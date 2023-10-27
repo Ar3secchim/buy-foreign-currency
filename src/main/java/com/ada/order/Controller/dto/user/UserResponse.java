@@ -1,4 +1,4 @@
-package com.ada.order.Controller.dto.user;
+package com.ada.order.controller.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,4 +10,3 @@ public class UserResponse {
     private String nome;
     private String cpf;
 }
-

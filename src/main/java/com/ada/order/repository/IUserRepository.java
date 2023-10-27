@@ -10,18 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
-public interface IUser extends JpaRepository<User, Integer>, QuerydslPredicateExecutor<User>{
-
+public interface IUserRepository extends JpaRepository<User, Integer>, QuerydslPredicateExecutor<User>{
 
     @Query(value = "SELECT * FROM USER WHERE ACTIVE = TRUE",nativeQuery = true)
     Page<User> findAllActiveUsers(Pageable pageable);
 
-
     List<User> findAllByName (String nome);
 
-    UserDetails findByCpf (String cpf);
-
-
-
-
+    User findByCpf (String cpf);
 }

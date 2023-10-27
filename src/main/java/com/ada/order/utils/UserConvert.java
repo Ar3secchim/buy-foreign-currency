@@ -1,8 +1,8 @@
 package com.ada.order.utils;
 
 
-import com.ada.order.Controller.dto.user.UserResponse;
-import com.ada.order.Controller.dto.user.UserRequest;
+import com.ada.order.controller.dto.user.UserResponse;
+import com.ada.order.controller.dto.user.UserRequest;
 import com.ada.order.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +14,7 @@ public class UserConvert {
 
     public static User toEntity(UserRequest userDTO) {
         User user = new User();
-        user.setNome(userDTO.getNome());
+        user.setName(userDTO.getNome());
         user.setCpf(userDTO.getCpf());
         user.setSenha(userDTO.getSenha());
         user.setActive(true);
@@ -24,7 +24,7 @@ public class UserConvert {
     public static UserResponse toResponse(User user) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(user.getId());
-        userResponse.setNome(user.getNome());
+        userResponse.setNome(user.getName());
         userResponse.setCpf(user.getCpf());
         return userResponse;
     }

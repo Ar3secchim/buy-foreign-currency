@@ -1,9 +1,8 @@
-package com.ada.order.Controller.dto;
+package com.ada.order.controller;
 
-
-import com.ada.order.Controller.dto.exception.PasswordValidationError;
-import com.ada.order.Controller.dto.user.UserRequest;
-import com.ada.order.Controller.dto.user.UserResponse;
+import com.ada.order.controller.dto.user.UserResponse;
+import com.ada.order.controller.exception.PasswordValidationError;
+import com.ada.order.controller.dto.user.UserRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping("/nome{nome}")
-    public ResponseEntity<UserResponse> getAllCustomerByName(@PathVariable String nome, @PathVariable Integer id) {
+    public ResponseEntity<UserResponse> getAllCustomerByName(@PathVariable String nome) {
         return ResponseEntity.ok((UserResponse) userService.getAllByName(nome));
     }
 

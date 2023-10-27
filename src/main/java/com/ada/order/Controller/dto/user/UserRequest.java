@@ -1,5 +1,4 @@
-package com.ada.order.Controller.dto.user;
-
+package com.ada.order.controller.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -18,6 +17,4 @@ public class UserRequest {
     private String senha;
 
     private String cpf;
-
-
 }

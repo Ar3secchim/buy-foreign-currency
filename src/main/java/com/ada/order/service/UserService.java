@@ -1,8 +1,8 @@
 package com.ada.order.service;
 
-import com.ada.order.Controller.dto.exception.PasswordValidationError;
-import com.ada.order.Controller.dto.user.UserRequest;
-import com.ada.order.Controller.dto.user.UserResponse;
+import com.ada.order.controller.exception.PasswordValidationError;
+import com.ada.order.controller.dto.user.UserRequest;
+import com.ada.order.controller.dto.user.UserResponse;
 import com.ada.order.model.User;
 import com.ada.order.utils.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.ada.order.repository.IUser;
+import com.ada.order.repository.IUserRepository;
 import com.ada.order.utils.UserConvert;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +23,13 @@ import java.util.Optional;
 public class UserService {
 
     @Autowired
-    IUser userRepository;
+    IUserRepository userRepository;
 
     @Autowired
-   PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     public Page<UserResponse> getUser(int page, int size, String direction){
-        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "name");
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.fromString(direction), "nome");
         Page<User> users = userRepository.findAllActiveUsers(pageRequest);
         return UserConvert.toResponsPage(users);
     }
@@ -76,10 +76,4 @@ public class UserService {
         user.setId(id);
         return UserConvert.toResponse(userRepository.save(user));
     }
-
-
-
-
-
-
 }

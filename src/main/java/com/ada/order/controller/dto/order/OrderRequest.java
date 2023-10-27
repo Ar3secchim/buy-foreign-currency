@@ -17,15 +17,4 @@ public class OrderRequest {
   private BigDecimal quotationValue;
   private BigDecimal valueTotalOperation;
   private String withdrawalAgencyNumber;
-
-  public OrderRequest(){
-
-  }
-  public OrderRequest(String cpfUser, LocalDateTime requestDate, TypeCurrency typeCurrency, BigDecimal valueForeignCurrency, String withdrawalAgencyNumber){
-    this.cpfUser = cpfUser;
-    this.requestDate = requestDate;
-    this.typeCurrency = typeCurrency;
-    this.valueForeignCurrency = valueForeignCurrency;
-    this.withdrawalAgencyNumber = withdrawalAgencyNumber;
-  }
 }

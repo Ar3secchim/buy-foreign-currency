@@ -33,9 +33,4 @@ public class ExchangeService {
     private static BigDecimal conversionRateExchangeForBigDecimal(Double rateExchange){
         return BigDecimal.valueOf(rateExchange);
     }
-
-    public static BigDecimal fetchExchangeRateAPI(TypeCurrency typeCurrency){
-        BigDecimal exchangeRate = BigDecimal.valueOf(1.2);
-        return exchangeRate;
-    }
 }

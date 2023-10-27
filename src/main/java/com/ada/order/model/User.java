@@ -27,8 +27,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name = "nome", nullable = false)
-    private String nome;
+    @Column (name = "name", nullable = false)
+    private String name;
 
     @Column (name = "cpf", nullable = false, unique = true)
     private String cpf;
@@ -82,8 +82,3 @@ public class User implements UserDetails {
         return false;
     }
 }
-
-
-
-
-

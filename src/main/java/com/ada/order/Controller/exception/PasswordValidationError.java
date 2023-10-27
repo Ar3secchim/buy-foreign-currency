@@ -1,4 +1,4 @@
-package com.ada.order.Controller.dto.exception;
+package com.ada.order.controller.exception;
 
 
 import lombok.AllArgsConstructor;
