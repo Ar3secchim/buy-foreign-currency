@@ -5,10 +5,12 @@ import com.ada.order.model.TypeCurrency;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,16 +28,26 @@ public class HttpCustom {
 
         try {
             ResponseEntity<List<Exchange>> response = restTemplate.exchange(
-                    URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<Exchange>>() {});
+                    URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<Exchange>>() {
+                    });
 
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null && !response.getBody().isEmpty()) {
                 return response.getBody().get(0);
-            }else{
+            } else {
                 System.out.println("error");
             }
+//        } catch (RestClientException error) {
+//            System.out.println("error");
+//        }
+
+            // Novo bloco
         } catch (RestClientException error) {
-            System.out.println("error");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found", error);
         }
+
+
+    }
+
       return null;
     }
 
