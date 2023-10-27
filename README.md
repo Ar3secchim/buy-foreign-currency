@@ -1,8 +1,15 @@
+## Group
+   - Renara Secchim
+   - Camila Cerqueira
+   - Luciana Mendes
+   - Felicianne Nogueira
+   - Carol Thiengo 
+
 # buy-foreign-currency
 Este projeto Java tem o objetivo de permitir que os usuários realizem ordens de compra de moedas estrangeiras de forma eficiente e conveniente, consumindo a API externa https://docs.awesomeapi.com.br/api-de-moedas para obter as taxas de câmbio. O sistema será composto por um back-end Java que lida com a lógica de negócios, integração com a API externa e armazenamento de dados.
 
 ## Funcionalidades
-- Consumir a Api externa https://economia.awesomeapi.com.br/USD-BRL
+- 🪙 Consumir a Api externa https://economia.awesomeapi.com.br/USD-BRL
 - 🔒 Cadastro, leitura, atualização e exclusão usuários.
 - 🚀 Realização de order de compra de moeda.
 - 📦 Cálculo do valor total com base na quantidade desejada e na taxa de câmbio
@@ -43,18 +50,19 @@ Exemplo de Criação (Create) - Criando um usuário:
   "dataDeNascimento": 1997,
   "estadoCivil": "casado",
   "sexo": "F",
-  "senha": "casado",
-  "active": false
+  "senha": "casado"
 }
 ```
 
 ###  POST createOrder
-Precisa de um usuário criado e autenticar o usuário com login e assim poderá
-fazer uma order
+Precisa de um usuário criado e autenticar o usuário com login e assim poderá 
+criar uma order
 
 ``http://localhost:8081/order``
 
 #### Request Headers
+- Autenticação do usuário via login, assim passar o token no header da 
+  request
 
 | Authorization      |                                                                                                                                                                                                                                         |
 | ----------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
