@@ -16,20 +16,12 @@ import java.io.IOException;
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
-  @Autowired
-  TokenService tokenService;
 
   @Autowired
   IUserRepository userRepository;
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-    String token =  getToken(request);
-    if(token != null){
-      String subject = tokenService.getSubject(token);
-      authenticate(subject);
-    }
-
     filterChain.doFilter(request, response);
   }
 
@@ -39,11 +31,5 @@ public class SecurityFilter extends OncePerRequestFilter {
       return null;
     }
     return token.substring(7);
-  }
-
-  private void authenticate(String subject){
-    UserDetails user = userRepository.findByCpf(subject);
-    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user, null,user.getAuthorities());
-    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
   }
 }

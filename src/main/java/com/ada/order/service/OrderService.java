@@ -9,7 +9,6 @@ import com.ada.order.repository.IOrderRepository;
 import com.ada.order.repository.IUserRepository;
 import com.ada.order.utils.OrderConvert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -28,7 +27,8 @@ public class OrderService {
   }
 
   public OrderResponse create(OrderRequest orderRequest){
-    User idUser = userRepository.findByCpf(orderRequest.getCpfUser());
+    User user = (User) userRepository.findByCpf(orderRequest.getCpfUser());
+    Integer idUser = user.getId();
     TypeCurrency current = orderRequest.getTypeCurrency();
 
     BigDecimal rateExchange = exchangeService.getRateExchange(current);
@@ -37,8 +37,8 @@ public class OrderService {
     Order order = OrderConvert.toEntity(orderRequest);
     order.setQuotationValue(rateExchange);
     order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
-
-    return OrderConvert.toResponse(orderRepository.save(order),idUser.getId());
+//,idUser.getId()
+    return OrderConvert.toResponse(orderRepository.save(order), idUser);
   }
 
   private static BigDecimal calcValueTotalOperation(BigDecimal rateExchange, BigDecimal value){

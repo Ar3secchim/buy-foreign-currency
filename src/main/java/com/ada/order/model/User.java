@@ -6,79 +6,75 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "user")
-@Where(clause = "active is true")
-
-
+@Entity(name = "user")
+@Table(name = "users")
 public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name = "name", nullable = false)
+    @Column (nullable = false)
     private String name;
 
-    @Column (name = "cpf", nullable = false, unique = true)
+    @Column (nullable = false, unique = true)
     private String cpf;
 
-    @Column (name = "dataDeNascimento", nullable = false)
+    @Column (nullable = false)
     private Double dataDeNascimento;
 
-    @Column (name = "estadoCivil", nullable = false)
+    @Column (nullable = false)
     private String estadoCivil;
 
-    @Column (name = "sexo", nullable = false)
+    @Column (nullable = false)
     private String sexo;
 
-    @Column (name = "senha", nullable = false)
+    @Column (nullable = false)
     private String senha;
-
-    private Boolean active;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("USER"));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return this.senha;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.cpf;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

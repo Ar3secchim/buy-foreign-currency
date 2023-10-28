@@ -21,7 +21,6 @@ public class ControllerAdvice {
     @Autowired
     private MessageSource messageSource;
 
-
     @ResponseStatus( code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public List<ValidationError> handler(MethodArgumentNotValidException exception) {
