@@ -36,19 +36,9 @@ public class HttpCustom {
             } else {
                 System.out.println("error");
             }
-//        } catch (RestClientException error) {
-//            System.out.println("error");
-//        }
-
-            // Novo bloco
-        } catch (RestClientException error) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Found", error);
+        } catch (ResponseStatusException ex) {
+            throw new ResponseStatusException(ex.getStatusCode(), ex.getMessage());
         }
-
-
+        return null;
     }
-
-      return null;
-    }
-
 }
