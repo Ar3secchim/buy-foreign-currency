@@ -43,7 +43,6 @@ public class OrderService {
     Order order = OrderConvert.toEntity(orderRequest);
     order.setQuotationValue(rateExchange);
     order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
-//,idUser.getId()
     return OrderConvert.toResponse(orderRepository.save(order), idUser);
   }
 
