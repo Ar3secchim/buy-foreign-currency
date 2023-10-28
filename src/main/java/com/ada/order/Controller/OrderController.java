@@ -1,4 +1,4 @@
-package com.ada.order.controller.dto;
+package com.ada.order.controller;
 
 import com.ada.order.controller.dto.order.OrderRequest;
 import com.ada.order.controller.dto.order.OrderResponse;

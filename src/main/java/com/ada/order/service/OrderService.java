@@ -4,7 +4,9 @@ import com.ada.order.model.Order;
 import com.ada.order.controller.dto.order.OrderRequest;
 import com.ada.order.controller.dto.order.OrderResponse;
 import com.ada.order.model.TypeCurrency;
-import com.ada.order.repository.OrderRepository;
+import com.ada.order.model.User;
+import com.ada.order.repository.IOrderRepository;
+import com.ada.order.repository.IUserRepository;
 import com.ada.order.utils.OrderConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,35 +15,33 @@ import java.math.BigDecimal;
 
 @Service
 public class OrderService {
-  private final OrderRepository orderRepository;
+  private final IOrderRepository orderRepository;
   private final ExchangeService exchangeService;
-  //private final UserRepository;
+  private  final IUserRepository userRepository;
 
   @Autowired
-  public OrderService (OrderRepository orderRepository,ExchangeService exchangeService) {
+  public OrderService (IOrderRepository orderRepository, ExchangeService exchangeService, IUserRepository userRepository) {
     this.orderRepository = orderRepository;
     this.exchangeService = exchangeService;
+    this.userRepository = userRepository;
   }
 
   public OrderResponse create(OrderRequest orderRequest){
+    User user = (User) userRepository.findByCpf(orderRequest.getCpfUser());
+    Integer idUser = user.getId();
     TypeCurrency current = orderRequest.getTypeCurrency();
+
     BigDecimal rateExchange = exchangeService.getRateExchange(current);
     BigDecimal valueForeignCurrency = orderRequest.getValueForeignCurrency();
 
     Order order = OrderConvert.toEntity(orderRequest);
     order.setQuotationValue(rateExchange);
     order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
-
-    return OrderConvert.toResponse(orderRepository.save(order));
+//,idUser.getId()
+    return OrderConvert.toResponse(orderRepository.save(order), idUser);
   }
 
   private static BigDecimal calcValueTotalOperation(BigDecimal rateExchange, BigDecimal value){
     return rateExchange.multiply(value);
-  }
-
-
-  public BigDecimal getRateExchange(TypeCurrency currency) {
-    BigDecimal exchangeRate  = ExchangeService.fetchExchangeRateAPI(currency);
-    return exchangeRate;
   }
 }

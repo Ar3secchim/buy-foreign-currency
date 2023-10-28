@@ -20,13 +20,12 @@ public class OrderConvert {
     return order;
   }
 
-  public static OrderResponse toResponse(Order order){
+  public static OrderResponse toResponse(Order order, Integer userId){
     DecimalFormat df = new DecimalFormat("#,###.00");
     OrderResponse orderResponse = new OrderResponse();
 
     orderResponse.setId(order.getId());
-    //TODO logic UserID
-    orderResponse.setIdUser(1);
+    orderResponse.setIdUser(userId);
     orderResponse.setCpfUser(order.getCpfUser());
     orderResponse.setRequestDate(order.getRequestDate());
     orderResponse.setTypeCurrency(order.getTypeCurrency());

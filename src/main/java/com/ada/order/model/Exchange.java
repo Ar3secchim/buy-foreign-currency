@@ -1,6 +1,6 @@
 package com.ada.order.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,7 @@
-package com.ada.order.Controller.dto.configuration;
+package com.ada.order.controller.configuration;
 
-import com.ada.order.Controller.dto.exception.PasswordValidationError;
-import com.ada.order.Controller.dto.exception.ValidationError;
+import com.ada.order.controller.exception.PasswordValidationError;
+import com.ada.order.controller.exception.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -20,7 +20,6 @@ public class ControllerAdvice {
 
     @Autowired
     private MessageSource messageSource;
-
 
     @ResponseStatus( code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
