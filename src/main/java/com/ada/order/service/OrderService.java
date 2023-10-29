@@ -29,7 +29,13 @@ public class OrderService {
   public OrderResponse create(OrderRequest orderRequest){
     User user = (User) userRepository.findByCpf(orderRequest.getCpfUser());
     Integer idUser = user.getId();
+
     TypeCurrency current = orderRequest.getTypeCurrency();
+
+    if (current != TypeCurrency.USD || current != TypeCurrency.EUR ){
+      throw new RuntimeException("TypeCurrency invalid. Use dollar (USD) or euros (EUR)");
+    }
+
 
     BigDecimal rateExchange = exchangeService.getRateExchange(current);
     BigDecimal valueForeignCurrency = orderRequest.getValueForeignCurrency();
