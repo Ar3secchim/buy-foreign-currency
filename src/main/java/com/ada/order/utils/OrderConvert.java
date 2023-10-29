@@ -1,8 +1,8 @@
 package com.ada.order.utils;
 
 import com.ada.order.model.Order;
-import com.ada.order.controller.dto.order.OrderRequest;
-import com.ada.order.controller.dto.order.OrderResponse;
+import com.ada.order.controller.dto.OrderRequest;
+import com.ada.order.controller.dto.OrderResponse;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;

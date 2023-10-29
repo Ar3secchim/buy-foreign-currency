@@ -1,10 +1,9 @@
 package com.ada.order.service;
 
+import com.ada.order.controller.dto.OrderRequest;
+import com.ada.order.controller.dto.OrderResponse;
 import com.ada.order.controller.exception.CurrentValidationError;
 import com.ada.order.model.Order;
-import com.ada.order.controller.dto.order.OrderRequest;
-import com.ada.order.controller.dto.order.OrderResponse;
-import com.ada.order.model.TypeCurrency;
 import com.ada.order.model.User;
 import com.ada.order.repository.IOrderRepository;
 import com.ada.order.repository.IUserRepository;

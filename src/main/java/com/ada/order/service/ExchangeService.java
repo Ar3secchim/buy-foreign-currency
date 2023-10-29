@@ -1,7 +1,6 @@
 package com.ada.order.service;
 
 import com.ada.order.model.Exchange;
-import com.ada.order.model.TypeCurrency;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;

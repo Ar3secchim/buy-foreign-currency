@@ -1,7 +1,7 @@
 package com.ada.order.controller;
 
-import com.ada.order.controller.dto.order.OrderRequest;
-import com.ada.order.controller.dto.order.OrderResponse;
+import com.ada.order.controller.dto.OrderRequest;
+import com.ada.order.controller.dto.OrderResponse;
 import com.ada.order.controller.exception.CurrentValidationError;
 import com.ada.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,6 @@
 package com.ada.order.service;
 
 import com.ada.order.model.Exchange;
-import com.ada.order.model.TypeCurrency;
 
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
