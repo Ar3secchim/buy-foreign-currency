@@ -20,7 +20,7 @@ public class ExchangeService {
         this.httpCustom = httpCustom;
     }
 
-    public BigDecimal getRateExchange(TypeCurrency currency) {
+    public BigDecimal getRateExchange(String currency) {
        Exchange exchangeResponse = httpCustom.getExchange(currency);
 
         if (exchangeResponse != null) {
