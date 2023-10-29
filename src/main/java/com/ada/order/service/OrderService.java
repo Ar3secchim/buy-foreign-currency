@@ -1,5 +1,6 @@
 package com.ada.order.service;
 
+import com.ada.order.controller.exception.CurrentValidationError;
 import com.ada.order.model.Order;
 import com.ada.order.controller.dto.order.OrderRequest;
 import com.ada.order.controller.dto.order.OrderResponse;
@@ -26,25 +27,22 @@ public class OrderService {
     this.userRepository = userRepository;
   }
 
-  public OrderResponse create(OrderRequest orderRequest){
-    User user = (User) userRepository.findByCpf(orderRequest.getCpfUser());
+  public OrderResponse create(OrderRequest orderRequest) throws CurrentValidationError {
+    User user = userRepository.findByCpf(orderRequest.getCpfUser());
     Integer idUser = user.getId();
+    String currency = orderRequest.getTypeCurrency();
 
-    TypeCurrency current = orderRequest.getTypeCurrency();
+    if (currency.equals("USD") || currency.equals("EUR")){
+      BigDecimal rateExchange = exchangeService.getRateExchange(currency);
+      BigDecimal valueForeignCurrency = orderRequest.getValueForeignCurrency();
 
-    if (current != TypeCurrency.USD || current != TypeCurrency.EUR ){
-      throw new RuntimeException("TypeCurrency invalid. Use dollar (USD) or euros (EUR)");
+      Order order = OrderConvert.toEntity(orderRequest);
+      order.setQuotationValue(rateExchange);
+      order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
+      return OrderConvert.toResponse(orderRepository.save(order), idUser);
     }
 
-
-    BigDecimal rateExchange = exchangeService.getRateExchange(current);
-    BigDecimal valueForeignCurrency = orderRequest.getValueForeignCurrency();
-
-    Order order = OrderConvert.toEntity(orderRequest);
-    order.setQuotationValue(rateExchange);
-    order.setValueTotalOperation(calcValueTotalOperation(rateExchange, valueForeignCurrency));
-//,idUser.getId()
-    return OrderConvert.toResponse(orderRepository.save(order), idUser);
+    throw new CurrentValidationError("TypeCurrency invalid. Use dollar (USD) or euros (EUR)");
   }
 
   private static BigDecimal calcValueTotalOperation(BigDecimal rateExchange, BigDecimal value){

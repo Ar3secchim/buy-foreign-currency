@@ -1,7 +1,8 @@
-package com.ada.order.Controller;
+package com.ada.order.controller;
 
 import com.ada.order.controller.dto.order.OrderRequest;
 import com.ada.order.controller.dto.order.OrderResponse;
+import com.ada.order.controller.exception.CurrentValidationError;
 import com.ada.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,7 +19,7 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/order")
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest){
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) throws CurrentValidationError{
       OrderResponse order =  orderService.create(orderRequest);
       return ResponseEntity
               .created(URI.create("/"+order.getId()))

@@ -1,9 +1,9 @@
 package com.ada.order.controller;
 
 import com.ada.order.controller.dto.user.UserResponse;
+import com.ada.order.controller.exception.CpfValidationError;
 import com.ada.order.controller.exception.PasswordValidationError;
 import com.ada.order.controller.dto.user.UserRequest;
-import com.ada.order.controller.exception.ValidationError;
 import com.ada.order.utils.UserConvert;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,9 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> saveUser(
             @Valid @RequestBody UserRequest userDTO
-    ) throws PasswordValidationError, ValidationError {
-        UserResponse userResponse = userService.saveUser(UserConvert.toEntity(userDTO));
+    ) throws PasswordValidationError, CpfValidationError {
+        UserResponse userResponse = userService.saveUser(userDTO);
+
         return ResponseEntity
                 .created(URI.create("/" +userResponse.getId()))
                 .body(userResponse);
@@ -42,7 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/cpf/{cpf}")
-    public ResponseEntity<UserResponse> getUserByCpf(@PathVariable String cpf) {
+    public ResponseEntity<UserResponse> getUserByCpf(@PathVariable String cpf)      {
         return ResponseEntity.ok(userService.getUserByCpf(cpf));
     }
 

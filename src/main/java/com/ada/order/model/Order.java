@@ -26,7 +26,7 @@ public class Order {
   private LocalDateTime requestDate;
 
   @Column(nullable = false)
-  private TypeCurrency typeCurrency; //tipo de moeda "currencyPair"
+  private String typeCurrency; //tipo de moeda "currencyPair"
 
   @Column(nullable = false)
   private BigDecimal valueForeignCurrency; //valor total da operaçao "amount"

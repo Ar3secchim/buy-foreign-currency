@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class OrderRequest {
   private String cpfUser;
   private LocalDateTime requestDate;
-  private TypeCurrency typeCurrency;
+  private String typeCurrency;
   private BigDecimal valueForeignCurrency;
   private BigDecimal quotationValue;
   private BigDecimal valueTotalOperation;
