@@ -11,7 +11,6 @@ public class UserRequest {
     @NotBlank()
     @Length(min = 3, max = 35)
     private String name;
-    @Length(min = 11, max = 11)
     private String cpf;
     private Double dataDeNascimento;
     private String estadoCivil;

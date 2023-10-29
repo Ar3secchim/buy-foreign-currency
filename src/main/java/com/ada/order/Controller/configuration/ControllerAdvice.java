@@ -1,5 +1,7 @@
-package com.ada.order.Controller.configuration;
+package com.ada.order.controller.configuration;
 
+import com.ada.order.controller.exception.CpfValidationError;
+import com.ada.order.controller.exception.CurrentValidationError;
 import com.ada.order.controller.exception.PasswordValidationError;
 import com.ada.order.controller.exception.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +47,20 @@ public class ControllerAdvice {
         return exception.getDescription();
     }
 
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CpfValidationError.class)
+    public String handlerCpf(CpfValidationError exception){
+        return exception.getDescription();
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(CurrentValidationError.class)
+    public String handlerCpf(CurrentValidationError exception){
+        return exception.getDescription();
+    }
+
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<String> handlerResponseStatusException(ResponseStatusException e) {
         return new ResponseEntity<>(e.getReason(), e.getStatusCode());
     }
-
 }
