@@ -4,7 +4,6 @@ import com.ada.order.controller.dto.user.UserResponse;
 import com.ada.order.controller.exception.CpfValidationError;
 import com.ada.order.controller.exception.PasswordValidationError;
 import com.ada.order.controller.dto.user.UserRequest;
-import com.ada.order.utils.UserConvert;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
