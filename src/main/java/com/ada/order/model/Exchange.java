@@ -1,11 +1,9 @@
 package com.ada.order.model;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Exchange{
     private String codein;
     private Double bid;

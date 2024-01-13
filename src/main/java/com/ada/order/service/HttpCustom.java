@@ -2,40 +2,50 @@ package com.ada.order.service;
 
 import com.ada.order.model.Exchange;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
+@Configuration
 public class HttpCustom {
-    private final RestTemplate restTemplate;
+  private String URL;
 
-    public HttpCustom() {
-        this.restTemplate = new RestTemplate();
-    }
+  WebClient webClient(){
+    return WebClient.builder().baseUrl(URL)
+      .build();
+  }
 
-    public  Exchange getExchange(String currency) {
+  public  Exchange getExchange(String currency) {
+    URL = "https://economia.awesomeapi.com.br/json/" + currency;
 
-        String URL = "https://economia.awesomeapi.com.br/json/" + currency;
+    try {
+      WebClient webClient = webClient();
 
-        try {
-            ResponseEntity<List<Exchange>> response = restTemplate.exchange(
-                    URL, HttpMethod.GET, null, new ParameterizedTypeReference<List<Exchange>>() {
-                    });
+      ResponseEntity<List<Exchange>> price = webClient.get()
+        .retrieve()
+        .onStatus(
+          status -> !status.is2xxSuccessful(),
+          response -> {
+              throw new ResponseStatusException(response.statusCode(), "Error retrieving currency");
+          }
+        ).toEntity(new ParameterizedTypeReference<List<Exchange>>() {
+        }).block();
 
-            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null && !response.getBody().isEmpty()) {
-                return response.getBody().get(0);
-            } else {
-                System.out.println("error");
-            }
-        } catch (ResponseStatusException ex) {
-            throw new ResponseStatusException(ex.getStatusCode(), ex.getMessage());
+        if (price != null) {
+            return Objects.requireNonNull(price.getBody()).get(0);
         }
-        return null;
+      } catch (ResponseStatusException ex) {
+          throw new ResponseStatusException(ex.getStatusCode(), ex.getMessage());
+      }
+      return null;
     }
 }
