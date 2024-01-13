@@ -1,10 +1,3 @@
-## Grupo
-   - Renara Secchim
-   - Camila Cerqueira
-   - Luciana Mendes
-   - Felicianne Nogueira
-   - Carol Thiengo 
-
 # buy-foreign-currency
 Este projeto Java tem o objetivo de permitir que os usuários realizem ordens de compra de moedas estrangeiras de forma eficiente e conveniente, consumindo a API externa https://docs.awesomeapi.com.br/api-de-moedas para obter as taxas de câmbio. O sistema será composto por um back-end Java que lida com a lógica de negócios, integração com a API externa e armazenamento de dados.
 
